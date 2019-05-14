@@ -1,0 +1,26 @@
+{
+  "name": "glob2caml",
+  "version": "0.1.0",
+  "description": "Convert glob notation to a CAML query",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishasz/glob2caml.git"
+  },
+  "keywords": [
+    "Glob",
+    "CAML",
+    "SharePoint",
+    "Office365",
+    "O365"
+  ],
+  "author": "Chris Hasz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrishasz/glob2caml/issues"
+  },
+  "homepage": "https://github.com/chrishasz/glob2caml#readme"
+}
