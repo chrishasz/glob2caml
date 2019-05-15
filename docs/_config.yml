@@ -50,8 +50,3 @@ minima:
 # Build settings
 markdown: kramdown
 remote_theme: chrishasz/yaght
-
-plugins:
- - jekyll-avatar
- - jekyll-feed
- - jekyll-seo-tag

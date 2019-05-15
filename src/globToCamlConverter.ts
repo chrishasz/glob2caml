@@ -1,8 +1,16 @@
 'use strict';
 
+import { IConversionOptions } from ".";
+
 export class GlobToCamlConverter {
 
-    static Convert(glob : any, spSitePath : string) : string {
+    public conversionOptions : IConversionOptions;
+
+    constructor(settings : IConversionOptions){
+        this.conversionOptions = settings;
+    }
+
+    public Convert(glob : any) : string {
         
         let camlQuery : string = '';
 
@@ -35,40 +43,40 @@ export class GlobToCamlConverter {
 
         //check for folder scope
         if(!glob.is.globstar && camlQuery != ''){
-            camlQuery = this.combineAnd(this.queryEqual(this.getFileDirRef, spSitePath + glob.base), camlQuery );
+            camlQuery = this.combineAnd(this.queryEqual(this.getFileDirRef, /*spSitePath +*/ glob.base), camlQuery );
         }
         else if(glob.is.globstar && camlQuery != ''){
-            camlQuery = this.combineAnd(this.queryLike(this.getFileDirRef, spSitePath + glob.base), camlQuery );
+            camlQuery = this.combineAnd(this.queryLike(this.getFileDirRef, /*spSitePath +*/ glob.base), camlQuery );
         }
         
         return camlQuery;
     }
 
-    private static combineAnd(firstQuery:string, secondQuery:string){
+    private combineAnd(firstQuery:string, secondQuery:string){
         return `<And>${firstQuery}${secondQuery}</And>`;
     }
 
-    private static queryEqual(operation : Function, value:string){
+    private queryEqual(operation : Function, value:string){
         return `<Eq>${operation()}${this.getValue(value)}</Eq>`;
     }
 
-    private static queryLike(operation : Function, value:string){
+    private queryLike(operation : Function, value:string){
         return `<Contains>${operation()}${this.getValue(value)}</Contains>`;
     }
 
-    private static queryNotEqual(operation : Function, value:string){
+    private queryNotEqual(operation : Function, value:string){
         return `<Neq>${operation()}${this.getValue(value)}</Neq>`;
     }
 
-    private static getFileDirRef(){
+    private getFileDirRef(){
         return '<FieldRef Name="FileDirRef"/>';
     }
 
-    private static getFieldRef(){
+    private getFieldRef(){
         return '<FieldRef Name="FileLeafRef"/>';
     }
 
-    private static getValue(value:string){
+    private getValue(value:string){
         return `<Value Type="Text">${value}</Value>`;
     }
 }

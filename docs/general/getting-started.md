@@ -3,4 +3,7 @@ layout: default
 title: Getting Started
 ---
 
-Getting Started
+## Using glob2Caml with Javascript
+
+
+## Using glob2Caml with Typescript

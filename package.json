@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/chrishasz/glob2caml/issues"
   },
-  "homepage": "https://github.com/chrishasz/glob2caml#readme"
+  "homepage": "https://github.com/chrishasz/glob2caml#readme",
+  "devDependencies": {
+    "assert": "^2.0.0"
+  }
 }
