@@ -24,6 +24,10 @@
   },
   "homepage": "https://github.com/chrishasz/glob2caml#readme",
   "devDependencies": {
-    "assert": "^2.0.0"
-  }
+    "@types/assert": "^1.4.2",
+    "@types/jest": "^24.0.13",
+    "assert": "^2.0.0",
+    "jest": "^24.8.0"
+  },
+  "dependencies": {}
 }

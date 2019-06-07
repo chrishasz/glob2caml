@@ -14,6 +14,11 @@ export class GlobToCamlConverter {
         
         let camlQuery : string = '';
 
+        //Full Query or Where only?
+        if( !this.conversionOptions.whereClauseOnly){
+
+        }
+
         //Limitation - can only support Neq for specific filenames.
         if(glob.is.negated){
             camlQuery = this.queryNotEqual(() => this.getFieldRef, glob.path.basename);
@@ -49,7 +54,7 @@ export class GlobToCamlConverter {
             camlQuery = this.combineAnd(this.queryLike(this.getFileDirRef, /*spSitePath +*/ glob.base), camlQuery );
         }
         
-        return camlQuery;
+        return this.where(camlQuery);
     }
 
     private combineAnd(firstQuery:string, secondQuery:string){
@@ -66,6 +71,18 @@ export class GlobToCamlConverter {
 
     private queryNotEqual(operation : Function, value:string){
         return `<Neq>${operation()}${this.getValue(value)}</Neq>`;
+    }
+
+    private query(operation : Function){
+        return `<query>${operation()}</query>`;
+    }
+
+    private where(value : string){
+        return `<where>${value}</where>`;
+    }
+
+    private view(operation : Function){
+        return `<view>${operation()}</view>`;
     }
 
     private getFileDirRef(){

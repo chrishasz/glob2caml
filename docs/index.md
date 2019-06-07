@@ -1,9 +1,7 @@
 ---
 layout: project
-title: Home
+title: Glob2Caml
 ---
-
-# Glob 2 Caml
 
 Glob2Caml is a simple Typescript library which generates a CAML query from a Glob String.
 
