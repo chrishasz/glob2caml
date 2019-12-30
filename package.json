@@ -1,7 +1,7 @@
 {
   "name": "glob2caml",
   "version": "0.1.0",
-  "description": "Convert glob notation to a CAML query",
+  "description": "Create a CAML query from a Glob string",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/chrishasz/glob2caml#readme",
   "devDependencies": {
-    "@types/assert": "^1.4.2",
-    "@types/jest": "^24.0.13",
+    "@types/assert": "^1.4.3",
+    "@types/jest": "^24.0.25",
     "assert": "^2.0.0",
-    "jest": "^24.8.0"
+    "jest": "^24.9.0"
   },
   "dependencies": {}
 }
