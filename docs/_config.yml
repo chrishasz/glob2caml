@@ -1,8 +1,8 @@
 title: Chris Hasz
 email: chrishasz@gmail.com
-description: >- 
+description: >-
   I build Enterprise software teams at SAP SalesCloud, and also open source projects. #EnterpriseTwitter
-baseurl: "glob2caml"
+baseurl: "/glob2caml"
 url: "https://www.chrishasz.com" # the base hostname & protocol for your site, e.g. http://example.com
 favicon: /images/favicon.jpg
 logo: /images/favicon.jpg
@@ -20,15 +20,18 @@ twitter:
 
 # Custom Navigation Links
 header_pages:
-  - name : spgo.md
-    title : SPGo
-    url : /spgo
-  - name : glob2caml.md
-    title : Glob2Caml
-    url : /glob2caml
-  - name : yaght.md
-    title : yaght
-    url : https://github.com/chrishasz/yaght
+ - name : blog
+   title : Blog
+   url : /blog
+ - name : spgo.md
+   title : SPGo
+   url : /spgo
+ - name : glob2caml.md
+   title : Glob2Caml
+   url : /glob2caml
+ - name : yaght.md
+   title : yaght
+   url : /yaght
 
 # Blog Config
 show_excerpts: true
