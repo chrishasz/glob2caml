@@ -60,3 +60,6 @@ out/
 
 # next.js build output
 .next
+
+# vscode related folders
+.vscode/
