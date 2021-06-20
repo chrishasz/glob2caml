@@ -31,6 +31,6 @@
     "jest": "^26.6.3"
   },
   "dependencies": {
-    "parse-glob": "^3.0.4"
+    "parse-glob": "^2.0.1"
   }
 }
