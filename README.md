@@ -1,2 +1,3 @@
 # glob2caml
-easily convert glob notation to CAML
+
+easily create CAML queries from glob strings
