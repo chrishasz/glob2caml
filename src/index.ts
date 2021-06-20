@@ -15,9 +15,6 @@ export function Convert(glob : any, conversionOptions : IConversionOptions) : st
 }
 
 export interface IConversionOptions{  
-    whereClauseOnly? : boolean;
-}
-
-export interface IGlob{  
+    column : string;
     whereClauseOnly? : boolean;
 }
