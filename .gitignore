@@ -45,21 +45,28 @@ typings/
 # Optional eslint cache
 .eslintcache
 
-# Optional REPL history
-.node_repl_history
-
 # Output of 'npm pack'
 *.tgz
 out/
 
-# Yarn Integrity file
-.yarn-integrity
+# Node
 
 # dotenv environment variables file
 .env
 
-# next.js build output
-.next
-
-# vscode related folders
+# vscode & related folders
 .vscode/
+.vscode
+.vscodeignore
+out
+*.vsix
+.vscode-test
+
+#Node Stuff
+npm-debug.log
+node_modules
+dist
+
+#Documentation
+docs/_site
+docs/Gemfile.lock

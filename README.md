@@ -1,3 +1,3 @@
 # glob2caml
 
-easily create CAML queries from glob strings
+Easily create CAML queries from glob strings.

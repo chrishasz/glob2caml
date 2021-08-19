@@ -10,8 +10,8 @@ export class GlobToCamlConverter {
 
     public conversionOptions : IConversionOptions;
 
-    constructor(settings : IConversionOptions){
-        this.conversionOptions = settings;
+    constructor(settings? : IConversionOptions){
+        this.conversionOptions = settings || {};
     }
 
     /**
@@ -19,66 +19,72 @@ export class GlobToCamlConverter {
      * @param path 
      * @returns 
      */
-    public Convert(path : string) : string {
+    public Convert(globString : string) : string {
         
-
-        const glob = parseGlob(path);
-
         let camlQuery : string = '';
-
-        //Full Query or Where only?
-        if( !this.conversionOptions.whereClauseOnly){
-
-        }
-
-        //Limitation - can only support Neq for specific filenames.
-        if(glob.is.negated){
-            camlQuery = this.queryNotEqual(() => this.createFieldRef, glob.path.basename);
-        }
-        else if(!glob.is.negated){
-            if(glob.path.filename == '*'){
-                // looking for all files: *, *.*
-                if(glob.path.extname == '*' || glob.path.extname == ''){
-                    camlQuery = '';
-                }
-                //trim out *, and create like: *.css => .css
-                else{
-                    camlQuery = this.queryLike(this.createFieldRef, glob.path.basename.replace(/\*/gi,''));
-                }
-            }
-            else{
-                // looking for single basename: fileName.*
-                if(glob.path.extname == '*'){
-                    camlQuery = this.queryLike(this.createFieldRef, glob.path.basename);
-                }
-                // looking for a single file: filename.ext
-                else{
-                    camlQuery = this.queryEqual(this.createFieldRef, glob.path.basename);
-                }
-            }
-        }
-
-        //check for folder scope
-        if(!glob.is.globstar && camlQuery != ''){
-            camlQuery = this.combineAnd(this.queryEqual(this.createFieldRef, glob.base), camlQuery );
-        }
-        else if(glob.is.globstar && camlQuery != ''){
-            camlQuery = this.combineAnd(this.queryLike(this.createFieldRef, glob.base), camlQuery );
-        }
         
-        return this.query(this.where(camlQuery));
+        if(globString){
+
+            const glob = parseGlob(globString);
+
+            //Limitation - can only support Neq for specific filenames.
+            if(glob.is.negated){
+                camlQuery = this.queryNotEqual(() => this.createFieldRef(this.conversionOptions.column), glob.path.basename);
+
+                camlQuery = this.where(camlQuery);
+            }
+            else if(!glob.is.negated){
+                if(glob.path.filename == '*'){
+                    // looking for all files: *, *.*
+                    if(glob.path.extname == '*' || glob.path.extname == ''){
+                        camlQuery = '';
+                    }
+                    //trim out *, and create like: *.css => .css
+                    else{
+                        camlQuery = this.queryLike(() => this.createFieldRef(this.conversionOptions.column), glob.path.basename.replace(/\*/gi,''));
+                        camlQuery = this.where(camlQuery);
+                    }
+
+                }
+                else{
+                    // looking for single basename: fileName.*
+                    if(glob.path.extname == '*'){
+                        camlQuery = this.queryLike(() => this.createFieldRef(this.conversionOptions.column), glob.path.basename);
+                    }
+                    // looking for a single file: filename.ext
+                    else{
+                        camlQuery = this.queryEqual(() => this.createFieldRef(this.conversionOptions.column), glob.path.basename);
+                    }
+
+                    camlQuery = this.where(camlQuery);
+                }
+            }
+
+            //check for folder scope
+            // if(!glob.is.globstar && camlQuery != ''){
+            //     camlQuery = this.combineAnd(this.queryEqual(this.createFieldRef, glob.base), camlQuery );
+            // }
+            // else if(glob.is.globstar && camlQuery != ''){
+            //     camlQuery = this.combineAnd(this.queryLike(this.createFieldRef, glob.base), camlQuery );
+            // }
+            if(!this.conversionOptions.whereClauseOnly){
+                camlQuery = this.query(camlQuery);
+            }
+        }
+
+        return camlQuery;
     }
 
-    private combineAnd(firstQuery:string, secondQuery:string){
-        return `<And>${firstQuery}${secondQuery}</And>`;
-    }
+    // private combineAnd(firstQuery:string, secondQuery:string){
+    //     return `<And>${firstQuery}${secondQuery}</And>`;
+    // }
 
     private queryEqual(operation : Function, value:string){
         return `<Eq>${operation()}${this.getValue(value)}</Eq>`;
     }
 
     private queryLike(operation : Function, value:string){
-        return `<Contains>${operation()}${this.getValue(value)}</Contains>`;
+        return `<Contains>${operation}${this.getValue(value)}</Contains>`;
     }
 
     private queryNotEqual(operation : Function, value:string){
@@ -86,18 +92,16 @@ export class GlobToCamlConverter {
     }
 
     private query(value : string){
-        return `<query>${value}</query>`;
+        return `<Query>${value}</Query>`;
     }
 
     private where(value : string){
-        return `<where>${value}</where>`;
+        return `<Where>${value}</Where>`;
     }
 
-    private view(operation : Function){
-        return `<view>${operation()}</view>`;
-    }
+    public createFieldRef(column : string){
+        //column = column || this.conversionOptions.column;
 
-    private createFieldRef(column : string){
         return `<FieldRef Name="${column}"/>`;
     }
 
