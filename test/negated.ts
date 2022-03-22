@@ -16,7 +16,7 @@ describe("Negated Tests", () => {
 
         let result : string = converter.Convert('!foo');
 
-        expect(result).to.equal('<Query><Where><Neq><FieldRef Name="Title"/><Value Type="Text">!foo</Value></Neq></Where></Query>');
+        expect(result).to.equal('<Query><Where><Neq><FieldRef Name="Title"/><Value Type="Text">foo</Value></Neq></Where></Query>');
     });
 
 });

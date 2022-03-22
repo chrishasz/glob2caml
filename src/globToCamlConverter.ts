@@ -16,7 +16,7 @@ export class GlobToCamlConverter {
 
     /**
      * 
-     * @param path 
+     * @param globString 
      * @returns 
      */
     public Convert(globString : string) : string {
@@ -78,6 +78,15 @@ export class GlobToCamlConverter {
     // private combineAnd(firstQuery:string, secondQuery:string){
     //     return `<And>${firstQuery}${secondQuery}</And>`;
     // }
+    private createFieldRef(column : string){
+        //column = column || this.conversionOptions.column;
+
+        return `<FieldRef Name="${column}"/>`;
+    }
+
+    private getValue(value:string){
+        return `<Value Type="Text">${value}</Value>`;
+    }
 
     private queryEqual(operation : Function, value:string){
         return `<Eq>${operation()}${this.getValue(value)}</Eq>`;
@@ -99,13 +108,7 @@ export class GlobToCamlConverter {
         return `<Where>${value}</Where>`;
     }
 
-    public createFieldRef(column : string){
-        //column = column || this.conversionOptions.column;
-
-        return `<FieldRef Name="${column}"/>`;
-    }
-
-    private getValue(value:string){
-        return `<Value Type="Text">${value}</Value>`;
-    }
+    // private view(value : string){
+    //     return `<View>${value}</View>`;
+    // }
 }

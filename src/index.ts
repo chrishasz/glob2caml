@@ -16,6 +16,7 @@ export function Convert(glob : any, conversionOptions : IConversionOptions) : st
 
 export interface IConversionOptions{  
     column? : string;
+    createView? : boolean;
+    orderBy? : string;
     whereClauseOnly? : boolean;
-    orderBy? : string
 }
